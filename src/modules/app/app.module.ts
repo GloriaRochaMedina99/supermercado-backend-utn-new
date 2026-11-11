@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductosModule } from './productos/productos.module';
-import { CategoriasModule } from './categorias/categorias.module';
-import { PromocionesModule } from './promociones/promociones.module';
+import { ProductosModule } from '../../productos/productos.module';
+import { CategoriasModule } from '../../categorias/categorias.module';
+import { PromocionesModule } from '../../promociones/promociones.module';
 
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();

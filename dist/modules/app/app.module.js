@@ -12,9 +12,9 @@ const common_1 = require("@nestjs/common");
 const observe_1 = require("@nestjs/observe");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const productos_module_1 = require("./productos/productos.module");
-const categorias_module_1 = require("./categorias/categorias.module");
-const promociones_module_1 = require("./promociones/promociones.module");
+const productos_module_1 = require("../../productos/productos.module");
+const categorias_module_1 = require("../../categorias/categorias.module");
+const promociones_module_1 = require("../../promociones/promociones.module");
 _a = (0, observe_1.createObserveModule)(), exports.ObserveModule = _a.ObserveModule, exports.ObserveInstrument = _a.ObserveInstrument;
 let AppModule = class AppModule {
 };

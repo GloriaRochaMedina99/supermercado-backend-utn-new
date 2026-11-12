@@ -1,0 +1,90 @@
+### Crear un producto
+POST http://localhost:3001/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Yogur natural",
+  "categoria": "Lácteos",
+  "precio": 1800,
+  "imagen": "/yogur.jpg"
+}
+
+### Consultar todos los productos
+GET http://localhost:3001/api/productos
+
+### Modificar un producto
+PATCH http://localhost:3001/api/productos/9
+Content-Type: application/json
+
+{
+  "precio": 2000
+}
+
+### Eliminar un producto
+DELETE http://localhost:3001/api/productos/9
+
+
+### Verificar productos después de eliminar
+GET http://localhost:3001/api/productos
+
+### Consultar categorías
+GET http://localhost:3001/api/categorias
+
+
+### Probar producto con precio incorrecto
+POST http://localhost:3001/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Yogur",
+  "categoria": "Lácteos",
+  "precio": -100
+}
+
+### Crear una categoría
+POST http://localhost:3001/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Congelados",
+  "imagen": "/categoria-congelados.jpg"
+}
+
+### Crear categoría con nombre vacío
+POST http://localhost:3001/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "imagen": "/categoria.jpg"
+}
+### Crear una promoción
+POST http://localhost:3001/api/promociones
+Content-Type: application/json
+
+{
+  "titulo": "Oferta de yogur",
+  "descripcion": "Llevando dos unidades obtenés un descuento",
+  "imagen": "/oferta-yogur.jpg"
+
+
+}### Crear promoción con título vacío
+POST http://localhost:3001/api/promociones
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "descripcion": "Oferta especial",
+  "imagen": "/oferta.jpg"
+}
+
+
+### Crear promoción con título vacío
+POST http://localhost:3001/api/promociones
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "descripcion": "Oferta especial",
+  "imagen": "/oferta.jpg"
+}

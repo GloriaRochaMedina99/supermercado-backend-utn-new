@@ -1,5 +1,18 @@
 
+# Dependencias
 node_modules/
+
+# Archivos compilados
 dist/
+
+# TypeScript
 *.tsbuildinfo
+
+# Variables de entorno privadas
 .env
+.env.*
+!.env.example
+src/.env
+
+# Archivos generados por Prisma
+/src/generated/

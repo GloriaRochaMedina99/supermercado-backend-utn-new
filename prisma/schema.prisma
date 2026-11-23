@@ -1,0 +1,30 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Producto {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  categoria String
+  precio    Decimal  @db.Decimal(10, 2)
+  imagen    String?
+}
+
+model Categoria {
+  id     Int     @id @default(autoincrement())
+  nombre String
+  imagen String?
+}
+
+model Promocion {
+  id          Int     @id @default(autoincrement())
+  titulo      String
+  descripcion String
+  imagen      String?
+}

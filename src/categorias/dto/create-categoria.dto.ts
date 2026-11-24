@@ -1,1 +1,16 @@
-export class CreateCategoriaDto {}
+
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
+
+export class CreateCategoriaDto {
+  @IsString()
+  @IsNotEmpty()
+  nombre: string;
+
+  @IsOptional()
+  @IsString()
+  imagen?: string;
+}

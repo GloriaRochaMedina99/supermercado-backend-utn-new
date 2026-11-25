@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../../generated/prisma/client.js';
@@ -8,11 +9,11 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    const adapter = new PrismaPg({
-      connectionString: process.env.DATABASE_URL!,
-    });
-
-    super({ adapter });
+    const connectionString = process.env.DATABASE_URL;
+    if (!connectionString) {
+      throw new Error('Falta DATABASE_URL en el .env de la raíz del proyecto');
+    }
+    super({ adapter: new PrismaPg({ connectionString }) });
   }
 
   async onModuleInit() {

@@ -1,4 +1,25 @@
-### Crear un producto
+### 1. Crear una categoría
+POST http://localhost:3001/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Congelados",
+  "imagen": "/categoria-congelados.jpg"
+}
+
+### 2. Consultar categorías
+GET http://localhost:3001/api/categorias
+
+### 3. Crear categoría con nombre vacío (debe dar 400)
+POST http://localhost:3001/api/categorias
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "imagen": "/categoria.jpg"
+}
+
+### 4. Crear un producto
 POST http://localhost:3001/api/productos
 Content-Type: application/json
 
@@ -9,29 +30,21 @@ Content-Type: application/json
   "imagen": "/yogur.jpg"
 }
 
-### Consultar todos los productos
+### 5. Consultar todos los productos
 GET http://localhost:3001/api/productos
 
-### Modificar un producto
-PATCH http://localhost:3001/api/productos/9
+### 6. Modificar producto (cambiá el 1 por el id que te devolvió al crear)
+PATCH http://localhost:3001/api/productos/1
 Content-Type: application/json
 
 {
   "precio": 2000
 }
 
-### Eliminar un producto
-DELETE http://localhost:3001/api/productos/9
+### 7. Eliminar producto (cambiá el 1 por el id que creaste)
+DELETE http://localhost:3001/api/productos/1
 
-
-### Verificar productos después de eliminar
-GET http://localhost:3001/api/productos
-
-### Consultar categorías
-GET http://localhost:3001/api/categorias
-
-
-### Probar producto con precio incorrecto
+### 8. Probar producto con precio incorrecto (debe dar 400)
 POST http://localhost:3001/api/productos
 Content-Type: application/json
 
@@ -41,45 +54,20 @@ Content-Type: application/json
   "precio": -100
 }
 
-### Crear una categoría
-POST http://localhost:3001/api/categorias
-Content-Type: application/json
-
-{
-  "nombre": "Congelados",
-  "imagen": "/categoria-congelados.jpg"
-}
-
-### Crear categoría con nombre vacío
-POST http://localhost:3001/api/categorias
-Content-Type: application/json
-
-{
-  "nombre": "",
-  "imagen": "/categoria.jpg"
-}
-### Crear una promoción
+### 9. Crear una promoción
 POST http://localhost:3001/api/promociones
 Content-Type: application/json
 
 {
   "titulo": "Oferta de yogur",
-  "descripcion": "Llevando dos unidades obtenés un descuento",
+  "descripcion": "Llevando dos unidades obtenés descuento",
   "imagen": "/oferta-yogur.jpg"
-
-
-}### Crear promoción con título vacío
-POST http://localhost:3001/api/promociones
-Content-Type: application/json
-
-{
-  "titulo": "",
-  "descripcion": "Oferta especial",
-  "imagen": "/oferta.jpg"
 }
 
+### 10. Consultar promociones
+GET http://localhost:3001/api/promociones
 
-### Crear promoción con título vacío
+### 11. Crear promoción con título vacío (debe dar 400)
 POST http://localhost:3001/api/promociones
 Content-Type: application/json
 

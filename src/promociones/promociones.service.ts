@@ -1,42 +1,64 @@
-import { Injectable } from '@nestjs/common';
-
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../modules/prisma/prisma.service'; 
+import { CreatePromocioneDto } from './dto/create-promocione.dto';
+import { UpdatePromocioneDto } from './dto/update-promocione.dto';
 
 @Injectable()
 export class PromocionesService {
-  private promociones: any[] = [
-    { id: 1, titulo: '2x1 en Lácteos seleccionados', descripcion: 'Llevando dos productos de la misma marca.', imagen: '/oferta-yogur-punto-market.png' },
-    { id: 2, titulo: 'Descuento en Panadería', descripcion: '15% de descuento abonando en efectivo los fines de semana.', imagen: '/oferta-pan-lactal-punto-market.png' },
-    { id: 3, titulo: 'Super Oferta en Frutas', descripcion: 'Manzanas rojas al mejor precio por kilo.', imagen: '/oferta-manzanas-punto-market.png' },
-  ];
+  constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return this.promociones;
+  async create(createPromocioneDto: CreatePromocioneDto) {
+    return this.prisma.promocion.create({
+      data: {
+        titulo: createPromocioneDto.titulo,
+        descripcion: createPromocioneDto.descripcion,
+        imagen: createPromocioneDto.imagen,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return this.promociones.find((p) => p.id === id);
+  async findAll() {
+    return this.prisma.promocion.findMany({
+      orderBy: { id: 'asc' },
+    });
   }
 
-  create(createPromocionDto: any) {
-    const nuevaPromocion = {
-      id: this.promociones.length + 1,
-      ...createPromocionDto,
-    };
-    this.promociones.push(nuevaPromocion);
-    return nuevaPromocion;
+  async findOne(id: number) {
+    const promocion = await this.prisma.promocion.findUnique({
+      where: { id },
+    });
+
+    if (!promocion) {
+      throw new NotFoundException(`No se encontró la promoción con id ${id}`);
+    }
+
+    return promocion;
   }
 
-  update(id: number, updatePromocionDto: any) {
-    const index = this.promociones.findIndex((p) => p.id === id);
-    if (index === -1) return null;
-    this.promociones[index] = { ...this.promociones[index], ...updatePromocionDto };
-    return this.promociones[index];
+  async update(id: number, updatePromocioneDto: UpdatePromocioneDto) {
+    await this.findOne(id);
+
+    return this.prisma.promocion.update({
+      where: { id },
+      data: {
+        ...(updatePromocioneDto.titulo !== undefined && {
+          titulo: updatePromocioneDto.titulo,
+        }),
+        ...(updatePromocioneDto.descripcion !== undefined && {
+          descripcion: updatePromocioneDto.descripcion,
+        }),
+        ...(updatePromocioneDto.imagen !== undefined && {
+          imagen: updatePromocioneDto.imagen,
+        }),
+      },
+    });
   }
 
-  remove(id: number) {
-    const index = this.promociones.findIndex((p) => p.id === id);
-    if (index === -1) return null;
-    const eliminada = this.promociones.splice(index, 1);
-    return eliminada[0];
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return this.prisma.promocion.delete({
+      where: { id },
+    });
   }
 }
